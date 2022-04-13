@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { Routes, Route } from 'react-router-dom'
+import Nav from './components/Nav';
 import ClassTable from './views/ClassTable';
+import Home from './views/Home';
+import Blog from './views/Blog';
 
 export default class App extends Component{
 	constructor(props){
@@ -9,22 +13,20 @@ export default class App extends Component{
 		}
 	};
     
-	componentDidMount(){
-		console.log('App Mounted')
-		fetch(`https://kekambas-bs.herokuapp.com/kekambas`)
-			.then(res => res.json())
-			.then(data => {
-				console.log(data)
-				this.setState({data})
-			})
-	}
+
 
 	render(){
 		return (
 			<>
-				{/* <h1>Hello World</h1> */}
-				<ClassTable classmates={this.state.data}/>
-
+				<Nav />
+				<div className="container">
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/peepsTable" element={<ClassTable />} />
+						<Route path="/blog" element={<Blog/>} />
+					</Routes>
+					{/* <ClassTable classmates={this.state.data}/> */}
+				</div>
 			</>
 
 		)
